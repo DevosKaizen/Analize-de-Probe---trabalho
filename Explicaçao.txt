@@ -1,0 +1,11 @@
+
+"Probes de rede" referem-se a pacotes ou mensagens enviadas através de uma rede para coletar informações específicas sobre o estado, desempenho ou configuração de dispositivos e rotas de rede. Essas "probes" (ou sondagens) são usadas em várias situações, como diagnóstico de problemas, monitoramento de desempenho, verificação de conectividade, e medição de latência.
+
+Alguns tipos comuns de probes de rede incluem:
+
+1. **ICMP Echo Requests (Ping):** Envia um pacote de solicitação de eco ICMP para um dispositivo e aguarda uma resposta, medindo o tempo de ida e volta (RTT) e verificando se o dispositivo está acessível.
+2. **Tracert/Traceroute:** Envia uma série de probes para determinar o caminho que os pacotes seguem através de uma rede até o destino.
+3. **SNMP (Simple Network Management Protocol):** Usa sondagens para coletar informações de dispositivos de rede gerenciados, como roteadores, switches e servidores.
+4. **Probes de TCP/UDP:** Sondagens feitas usando pacotes TCP ou UDP para verificar se portas específicas estão abertas ou para medir a latência e a qualidade da conexão.
+
+Essas sondagens são uma ferramenta fundamental para administradores de rede e engenheiros de sistemas para garantir que as redes estejam funcionando de forma eficiente e para identificar e resolver problemas rapidamente.
