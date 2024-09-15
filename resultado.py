@@ -105,4 +105,39 @@ try:
         
         print(resumo)
         print(explicacao)
-        resultados.append(("Resumo das La
+        resultados.append(("Resumo das Latências",))
+        resultados.append((f"Melhor Latência: {melhor_latencia[0]} ({melhor_latencia[1]})",))
+        resultados.append((f"Pior Latência: {pior_latencia[0]} ({pior_latencia[1]})",))
+        resultados.append((f"Média das Latências: {media_latencia:.2f}",))
+        resultados.append((f"Latências abaixo de 100ms: {latencias_abaixo_100ms}",))
+        resultados.append((f"Latências entre 100ms e 500ms: {latencias_100ms_500ms}",))
+        resultados.append((f"Latências acima de 500ms: {latencias_acima_500ms}",))
+        resultados.append(("Explicação dos Resultados",))
+        resultados.append(("Melhor Latência: A menor latência registrada, indicando a menor demora na comunicação.",))
+        resultados.append(("Pior Latência: A maior latência registrada, indicando a maior demora na comunicação.",))
+        resultados.append(("Média das Latências: A média das latências registradas, fornecendo uma visão geral do desempenho.",))
+        resultados.append(("Latências abaixo de 100ms: Quantidade de latências consideradas muito boas.",))
+        resultados.append(("Latências entre 100ms e 500ms: Quantidade de latências consideradas aceitáveis.",))
+        resultados.append(("Latências acima de 500ms: Quantidade de latências consideradas ruins.",))
+
+    # Gerar nomes de arquivos com timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    nome_arquivo_txt = f"resultados_{timestamp}.txt"
+    nome_arquivo_csv = f"resultados_{timestamp}.csv"
+
+    # Escrever resultados em um arquivo .txt
+    with open(nome_arquivo_txt, 'w') as arquivo_resultados_txt:
+        for linha in resultados:
+            arquivo_resultados_txt.write(' | '.join(map(str, linha)) + '\n')
+
+    # Escrever resultados em um arquivo .csv
+    with open(nome_arquivo_csv, 'w', newline='') as arquivo_resultados_csv:
+        escritor_csv = csv.writer(arquivo_resultados_csv)
+        escritor_csv.writerow(["Origem", "Origem Geo", "Destino", "Destino Geo", "Timestamp", "Latência", "Número de Hops"])
+        for linha in resultados:
+            escritor_csv.writerow(linha)
+
+except json.JSONDecodeError as e:
+    print(f"Erro ao decodificar o JSON: {e}")
+except FileNotFoundError:
+    print("Arquivo JSON não encontrado.")
