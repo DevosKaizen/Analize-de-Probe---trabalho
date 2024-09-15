@@ -45,7 +45,7 @@ def processar_item(item, cache_geo):
             origem_probe_geo = obter_informacoes_geograficas(origem_probe, cache_geo)
             resultados_item.append((origem_probe, origem_probe_geo, latencia, numero_hops))
             if isinstance(latencia, (int, float)):
-                latencias_item.append((latencia, origem_probe_geo))
+                latencias_item.append((latencia, origem_probe_geo, timestamp))
 
     return resultados_item, latencias_item
 
@@ -83,6 +83,9 @@ try:
         latencias_100ms_500ms = len([x for x in latencias if 100 <= x[0] < 500])
         latencias_acima_500ms = len([x for x in latencias if x[0] >= 500])
         
+        # Top 5 melhores latências
+        top_5_latencias = sorted(latencias, key=lambda x: x[0])[:5]
+        
         resumo = (
             f"\nResumo das Latências:\n"
             f"Melhor Latência: {melhor_latencia[0]} ({melhor_latencia[1]})\n"
@@ -119,6 +122,11 @@ try:
         resultados.append(("Latências abaixo de 100ms: Quantidade de latências consideradas muito boas.",))
         resultados.append(("Latências entre 100ms e 500ms: Quantidade de latências consideradas aceitáveis.",))
         resultados.append(("Latências acima de 500ms: Quantidade de latências consideradas ruins.",))
+        
+        # Adicionar o pódio das 5 melhores latências
+        resultados.append(("Top 5 Melhores Latências",))
+        for i, (latencia, geo, timestamp) in enumerate(top_5_latencias, start=1):
+            resultados.append((f"{i}º Lugar: Latência: {latencia}, Local: {geo}, Timestamp: {timestamp}",))
 
     # Gerar nomes de arquivos com timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
